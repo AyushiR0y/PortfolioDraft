@@ -1,0 +1,25 @@
+import cv2
+import numpy as np
+
+original_image = cv2.imread('original_image.jpg')
+
+subset_image = original_image[0:17, 0:17]
+
+
+
+# Apply inverse filter
+# First, we need to convert the images to float32 for further calculations
+subset_float = np.float32(subset_image)
+blurred_float = np.float32(blurred_image)
+
+# Calculate the inverse of the blurred image
+inverse_blur = cv2.divide(np.ones_like(blurred_float), blurred_float, scale=255)
+
+# Convert the inverse filter image back to uint8
+inverse_blur = np.uint8(inverse_blur)
+
+# Display the results
+cv2.imshow('Original Subset', subset_image)
+cv2.imshow('Blurred Subset', blurred_image)
+cv2.imshow('Inverse Filter', inverse_blur)
+cv2.waitKey(0)cv2.destroyAllWindows()
